@@ -1,16 +1,16 @@
 from lib.models.author import Author
 from lib.models.magazine import Magazine
 from lib.models.article import Article
-from lib.db.connection import get_connection  # Added this import
+from lib.db.connection import get_connection  
 
 def run_queries():
-    # First ensure we have some test data
+    
     from lib.db.seed import seed_database
     seed_database()
     
     print("\n=== Running Queries ===\n")
     
-    # 1. Get all articles written by a specific author
+    
     author = Author.find_by_name("John Doe")
     if not author:
         print("Author 'John Doe' not found!")
@@ -20,12 +20,12 @@ def run_queries():
     for article in author.articles():
         print(f"- {article.title}")
     
-    # 2. Find all magazines a specific author has contributed to
+
     print("\n2. Magazines John Doe has contributed to:")
     for magazine in author.magazines():
         print(f"- {magazine.name} ({magazine.category})")
     
-    # 3. Get all authors who have written for a specific magazine
+    
     magazine = Magazine.find_by_name("Tech Today")
     if not magazine:
         print("Magazine 'Tech Today' not found!")
@@ -35,7 +35,7 @@ def run_queries():
     for contributor in magazine.contributors():
         print(f"- {contributor.name}")
     
-    # 4. Find magazines with articles by at least 2 different authors
+    
     print("\n4. Magazines with articles by at least 2 authors:")
     conn = get_connection()
     cursor = conn.cursor()
@@ -50,7 +50,7 @@ def run_queries():
     for row in rows:
         print(f"- {row['name']}")
     
-    # 5. Count the number of articles in each magazine
+
     print("\n5. Article count per magazine:")
     conn = get_connection()
     cursor = conn.cursor()
@@ -65,7 +65,7 @@ def run_queries():
     for row in rows:
         print(f"- {row['name']}: {row['article_count']}")
     
-    # 6. Find the author who has written the most articles
+
     print("\n6. Author with most articles:")
     conn = get_connection()
     cursor = conn.cursor()

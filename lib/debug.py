@@ -4,10 +4,10 @@ from lib.models.magazine import Magazine
 from lib.models.article import Article
 
 def debug():
-    # Seed the database first
+    
     seed_database()
     
-    # Test Author
+    
     print("=== Testing Author ===")
     author = Author.find_by_name("John Doe")
     if author:
